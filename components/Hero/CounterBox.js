@@ -7,8 +7,8 @@ const CounterBox = ({counter, heading}) => {
             <div className='text-5xl font-bold text-white'>
                 <CountUp thousandsSeparator="," end={counter} isCounting duration={4} />
             </div>
-            <div>
-                <span className='text-xl text-white font-semibold'>{heading}</span>
+            <div className='text-center'>
+                <span className='text-xl text-center text-white font-semibold'>{heading}</span>
             </div>
         </div>
     )
