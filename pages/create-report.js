@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import { countries } from '@/components/Helpers/Countries';
 const createReport = () => {
     const [reportType, setReportType] = React.useState(10);
 
@@ -38,13 +38,6 @@ const createReport = () => {
 
                 <div className=' py-5 mx-auto max-w-md px-2 md:max-w-screen-md min-h-full'>
                     <h1 className='font-normal text-xl md:text-4xl mt-4 md:mt-8 mb-6 md:mb-12 text-center text-gray-900'>Describe your existing or new business in detail, receive a comprehensive analysis of the idea.</h1>
-
-                    {/* <Textarea
-                    
-                        slots={{ textarea: InnerTextarea }}
-                        slotProps={{ textarea: { placeholder: 'Example: An online marketplace for renting luxury fashion and accessories' } }}
-                        sx={divStyles}
-                    /> */}
 
                     <TextField
                         id="outlined-textarea"
@@ -88,11 +81,11 @@ const createReport = () => {
                                 value={language}
                                 label="Language"
                                 onChange={handleChange}
-
+                                
                             >
-                                <MenuItem value={10}>English</MenuItem>
-                                <MenuItem value={20}>dansk</MenuItem>
-                                <MenuItem value={30}>Cymraege</MenuItem>
+                                 {countries.map((item, index)=>{
+                                    return <MenuItem key={index} value={item.id}>{item.item}</MenuItem>
+                                })}
                             </Select>
                         </FormControl>
 
