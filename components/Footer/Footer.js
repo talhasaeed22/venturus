@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div className='flex flex-col bg-[#242e42] md:px-28 py-10 px-5'>
+        <div className='flex flex-col bg-[#212121] md:px-28 py-10 px-5'>
             <div className='flex lg:flex-row flex-col gap-5 justify-between items-center border-b pb-4 border-gray-700'>
 
                 <div className='flex '>
@@ -26,7 +26,7 @@ const Footer = () => {
             </div>
 
             <div className='flex sm:flex-row flex-col gap-5 justify-between items-center pt-10'>
-                <span className='text-white'>© Copyright 2023. All Rights Reserved by <span className='underline text-[#22c55e]'>VenturusAI.</span></span>
+                <span className='text-white'>© Copyright 2023. All Rights Reserved by <span className='underline text-[#1e51fd]'>VenturusAI.</span></span>
 
                 <div className='flex gap-10'>
                     <i style={{fontSize:'24px', color:"rgb(156 163 175 "}} className="fa fa-linkedin-square cursor-pointer" aria-hidden="true"></i>

@@ -22,7 +22,7 @@ function classNames(...classes) {
 const Navbar = () => {
   const router = useRouter();
   return (
-    <Disclosure as='nav' className=' bg-[#242e42]'>
+    <Disclosure as='nav' className=' bg-[#212121]'>
       {({ open }) => (
         <>
           <div className='mx-auto max-w-7xl sm:py-2 px-2 sm:px-6 lg:px-6'>
@@ -49,8 +49,8 @@ const Navbar = () => {
                 </Disclosure.Button>
               </div>
               <img
-                className='block h-12 w-28 md:ml-0 ml-5 '
-                src='/images/logo.svg'
+                className='block w-20 md:ml-0 ml-5 '
+                src='/images/logos/main.png'
                 alt='Your Company'
               />
               <div className='flex flex-1 items-center justify-center sm:items-stretch '>
@@ -63,8 +63,8 @@ const Navbar = () => {
                             <Disclosure.Button
                               className={classNames(
                                 item.current
-                                  ? 'text-[#5a6a83] text-[0.875rem] font-[500] hover:text-white transition duration-300 ease-in-out'
-                                  : 'text-[#5a6a83] font-[500] text-[0.875rem] hover:text-white transition duration-300 ease-in-out',
+                                  ? 'text-gray-400 text-[0.875rem] font-[500] hover:text-white transition duration-300 ease-in-out'
+                                  : 'text-gray-400 font-[500] text-[0.875rem] hover:text-white transition duration-300 ease-in-out',
                                 'px-2 py-2  font-medium cursor-pointer'
                               )}
                               aria-current={item.current ? 'page' : undefined}
@@ -83,7 +83,7 @@ const Navbar = () => {
               <div className='absolut inset-y-0 right-0 gap-3 items-center pr-12 sm:static sm:inset-auto sm:ml-6 md:pr-0'>
                 <button
                   onClick={() => router.push('/sign-in')}
-                  className='text-[#22c55e] py-2 px-4 sm:text-[15px] text-[13px] hover:bg-gray-700 rounded-[0.5rem]'
+                  className='bg-[#1e51fd] py-2 px-4 text-white sm:text-[15px] text-[13px] hover:bg-gray-700 rounded-[0.5rem]'
                 >
                   Login/Register
                 </button>
@@ -100,8 +100,8 @@ const Navbar = () => {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? ' text-[#5a6a83] text-[0.875rem] font-[500] hover:text-white'
-                      : 'text-[#5a6a83] text-[0.875rem] font-[500] hover:text-white',
+                      ? ' text-gray-400 text-[0.875rem] font-[500] hover:text-white'
+                      : 'text-gray-400 text-[0.875rem] font-[500] hover:text-white',
                     'block px-3 py-2 border-b border-[#5a6a83]'
                   )}
                   aria-current={item.current ? 'page' : undefined}
