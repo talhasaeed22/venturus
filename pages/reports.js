@@ -11,15 +11,15 @@ const Reports = () => {
                 <div className='flex flex-col gap-5 p-4'>
 
                     <span className='text-white font-semibold text-[1rem] '>Reports</span>
-                    <div className='flex justify-between items-center border-b pb-2 border-gray-700 '>
-                        <div className='w-[30%] '>
+                    <div className='flex lg:flex-row flex-col justify-between gap-3 items-center border-b pb-2 border-gray-700 '>
+                        <div className='lg:w-[30%] w-full '>
                             <Input placeholder="Search…" color='success' sx={{ width: '100%', color: '#d1d5db', backgroundColor: 'rgb(55, 65, 81)', border: '1px solid #4b5563' }} startDecorator={<i className="fa fa-search" aria-hidden="true"></i>} />
 
                         </div>
 
-                        <div className=''>
+                        <div className='w-full lg:w-fit'>
 
-                            <button className={`px-4 hover:bg-[#357a3a] py-[0.5rem]  bg-[#4caf50] text-white rounded-[0.5rem]`}> <i className="fa fa-plus text-normal mr-2" aria-hidden="true"></i>
+                            <button className={`px-4 w-full hover:bg-[#357a3a] py-[0.5rem]  bg-[#4caf50] text-white rounded-[0.5rem]`}> <i className="fa fa-plus text-normal mr-2" aria-hidden="true"></i>
                                 New Report</button>
                         </div>
 
