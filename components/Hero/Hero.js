@@ -26,9 +26,9 @@ const Hero = () => {
 
 
             </div>
-            <div className=' lg:px-20 px-5'>
+            {/* <div className=' lg:px-20 px-5'>
                 <HeroLogos />
-            </div>
+            </div> */}
 
             <div className='my-16'>
                 <Countup/>

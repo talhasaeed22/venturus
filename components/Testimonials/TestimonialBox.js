@@ -2,7 +2,7 @@ import React from 'react'
 
 const TestimonialBox = ({heading, para, name}) => {
     return (
-        <div className='flex flex-col gap-5 p-5 bg-[#2e3b52]'>
+        <div className='flex flex-col gap-5 p-5 bg-[#212121]'>
             <div>
 
                 <h3 className='text-[0.875rem] text-[#9ca3af]'>{para}</h3>
