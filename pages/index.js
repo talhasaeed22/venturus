@@ -15,9 +15,9 @@ export default function Home() {
         <Discover/>
       </div>
 
-      <div className="my-14">
+      {/* <div className="my-14">
         <Testimonials/>
-      </div>
+      </div> */}
     </>
   )
 }

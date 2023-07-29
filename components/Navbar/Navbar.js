@@ -49,7 +49,8 @@ const Navbar = () => {
                 </Disclosure.Button>
               </div>
               <img
-                className='block w-20 md:ml-0 ml-5 '
+                onClick={() => router.push('/')}
+                className='block w-20 md:ml-0 ml-5 cursor:pointer'
                 src='/images/logos/main.png'
                 alt='Your Company'
               />
