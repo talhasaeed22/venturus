@@ -6,15 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { countries } from '@/components/Helpers/Countries';
-import { useAuth, UserButton } from '@clerk/nextjs';
-import { useRouter } from 'next/router';
 const createReport = () => {
   // const router = useRouter()
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
 
-  if (!userId) {
-    console.log('No user found');
-  }
   const [reportType, setReportType] = React.useState(10);
 
   const handleReportChange = (event) => {
@@ -41,7 +35,6 @@ const createReport = () => {
         <title>Create report - VenturusAI</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <UserButton afterSignOutUrl='/sign-in' />
       <div className=' mx-auto  bg-gradient-to-r from-purpleish-lighter to-greenish-lighter'>
         <div className=' py-5 mx-auto max-w-md px-2 md:max-w-screen-md min-h-full'>
           <h1 className='font-normal text-xl md:text-4xl mt-4 md:mt-8 mb-6 md:mb-12 text-center text-gray-900'>
