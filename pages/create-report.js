@@ -32,12 +32,12 @@ const createReport = () => {
   return (
     <>
       <Head>
-        <title>Create report - VenturusAI</title>
+        <title>Create report - Orgops AI</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <div className=' mx-auto  bg-gradient-to-r from-purpleish-lighter to-greenish-lighter'>
         <div className=' py-5 mx-auto max-w-md px-2 md:max-w-screen-md min-h-full'>
-          <h1 className='font-normal text-xl md:text-4xl mt-4 md:mt-8 mb-6 md:mb-12 text-center text-gray-900'>
+          <h1 className='font-normal text-xl md:text-3xl mt-4 md:mt-8 mb-6 md:mb-12 text-center text-gray-900'>
             Describe your existing or new business in detail, receive a
             comprehensive analysis of the idea.
           </h1>
@@ -50,13 +50,12 @@ const createReport = () => {
             }
             multiline
             rows={3}
-            color='success'
             value={text}
             onChange={handleTextChange}
             style={{ width: '100%', borderRadius: '6px' }}
             InputProps={{
               endAdornment: (
-                <div style={{ color: '#6b7280', fontSize: '1rem' }}>
+                <div style={{ color: '#1e51fd', fontSize: '1rem' }}>
                   {wordCount}/1000 (min.8)
                 </div>
               ),
@@ -74,7 +73,6 @@ const createReport = () => {
                 value={reportType}
                 label='Select a report type'
                 onChange={handleReportChange}
-                color='success'
               >
                 <MenuItem value={10}>Advanced</MenuItem>
                 <MenuItem value={20}>Standard</MenuItem>
@@ -84,7 +82,6 @@ const createReport = () => {
             <FormControl fullWidth>
               <InputLabel id='demo-simple-select-label'>Language</InputLabel>
               <Select
-                color='success'
                 labelId='demo-simple-select-label'
                 id='demo-simple-select'
                 value={language}
@@ -105,7 +102,7 @@ const createReport = () => {
               disabled={text.length === 0}
               className={`px-4 ${
                 text.length < 8 && 'cursor-not-allowed opacity-50'
-              }  hover:bg-[#357a3a] h-min py-[0.5rem] sm:w-fit w-full bg-[#4caf50] text-white rounded-[0.5rem]`}
+              }  hover:bg-[#1e51fd] h-min py-[0.5rem] sm:w-fit w-full bg-[#1e51fd] text-white rounded-[0.5rem]`}
             >
               Generate
             </button>

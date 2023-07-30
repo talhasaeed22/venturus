@@ -4,10 +4,11 @@ import { useState } from 'react';
 
 const GeneratedReportPage = ({ responseData }) => {
   const tabHeadings = Object.keys(data.responses);
-
+  const title = "AI robotics Lab with alot of interface with students AI robotics Lab with alot of interface with students studying computer science"
   return (
-    <div className='container mx-auto'>
-      <Tabs defaultValue={tabHeadings[0]} className='w-[600px]'>
+    <div className='container mx-auto flex flex-col justify-center items-center my-10'>
+      <h2 className='text-xl font-bold mb-8 max-w-4xl'>Generated Report for {title}</h2>
+      <Tabs defaultValue={tabHeadings[0]} className='w-[600px] mb-10'>
         <TabsList>
           {tabHeadings.map((tabHeading) => (
             <TabsTrigger key={tabHeading} value={tabHeading}>
