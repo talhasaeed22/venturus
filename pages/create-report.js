@@ -10,6 +10,7 @@ import { countries } from '@/components/Helpers/Countries';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setGeneratedReport } from '../store/actions';
+import Loader from '@/components/Loader/Loader';
 const createReport = () => {
   const router = useRouter();
 
@@ -144,7 +145,13 @@ const createReport = () => {
             </div>
           </div>
         ) : (
-          <p>Loading...</p>
+          <div className='h-screen'>
+            <div className='flex flex-col space-y-6 justify-center items-center my-20'>
+              <h2 className='text-2xl font-bold'>Generating Your report...</h2>
+              <Loader/>
+              <p>Please wait while we process your request</p>
+            </div>
+          </div>
         )}
       </div>
     </>

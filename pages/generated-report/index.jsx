@@ -1,5 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useRouter } from 'next/router';
