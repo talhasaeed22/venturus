@@ -10,6 +10,9 @@ import { countries } from '@/components/Helpers/Countries';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setGeneratedReport } from '../store/actions';
+import { collection, addDoc } from "firebase/firestore";
+import { db, auth } from '@/FirebaseConfig';
+
 import Loader from '@/components/Loader/Loader';
 const createReport = () => {
   const router = useRouter();
@@ -39,6 +42,10 @@ const createReport = () => {
   const wordCount = text.length;
 
   const handleGeneratedReport = async () => {
+    const currentTime = new Date();
+    const month = currentTime.getMonth() + 1;
+    const date = currentTime.getDate();
+    const year = currentTime.getFullYear();
     console.log('Submitted');
     try {
       setLoading(true);
@@ -51,15 +58,30 @@ const createReport = () => {
 
       const responseData = response.data;
       console.log(responseData.responses);
-      dispatch(setGeneratedReport(responseData));
+
+      await addDoc(collection(db, 'reports'), {
+        user: auth.currentUser.uid,
+        title: text,
+        status: "Generated",
+        type: reportType === 10 ? 'Advanced' : 'Standard',
+        report: responseData,
+        month:month,
+        date:date,
+        year:year
+      })
+
+
+      // dispatch(setGeneratedReport(responseData));
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
-      router.push({
-        pathname: '/generated-report',
-        query: { title: text },
-      });
+      alert('Added')
+      setText('')
+      // router.push({
+      //   pathname: '/generated-report',
+      //   query: { title: text },
+      // });
     }
   };
 
@@ -136,9 +158,8 @@ const createReport = () => {
               <button
                 onClick={handleGeneratedReport}
                 disabled={text.length === 0}
-                className={`px-4 ${
-                  text.length < 8 && 'cursor-not-allowed opacity-50'
-                }  hover:bg-[#1e51fd] h-min py-[0.5rem] sm:w-fit w-full bg-[#1e51fd] text-white rounded-[0.5rem]`}
+                className={`px-4 ${text.length < 8 && 'cursor-not-allowed opacity-50'
+                  }  hover:bg-[#1e51fd] h-min py-[0.5rem] sm:w-fit w-full bg-[#1e51fd] text-white rounded-[0.5rem]`}
               >
                 Generate
               </button>
@@ -148,7 +169,7 @@ const createReport = () => {
           <div className='h-screen'>
             <div className='flex flex-col space-y-6 justify-center items-center my-20'>
               <h2 className='text-2xl font-bold'>Generating Your report...</h2>
-              <Loader/>
+              <Loader />
               <p>Please wait while we process your request</p>
             </div>
           </div>

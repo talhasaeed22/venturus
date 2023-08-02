@@ -28,6 +28,7 @@ const SignIn = () => {
         const googleProvider = new GoogleAuthProvider();
         await signInWithPopup(auth, googleProvider)
             .then((result) => {
+                localStorage.setItem("user" , result.user)
                 router.push("/");
             })
             .catch((err) => {
@@ -40,6 +41,8 @@ const SignIn = () => {
         const facebookProvider = new FacebookAuthProvider();
         await signInWithPopup(auth, facebookProvider)
         .then((result) => {
+            localStorage.setItem("user" , result.user)
+
             router.push("/");
         })
         .catch((err) => {
@@ -62,7 +65,8 @@ const SignIn = () => {
         )
             .then(() => {
                 setIsLoading(false);
-                router.push("/create-post");
+                localStorage.setItem("user" , result.user)
+                router.push("/");
             })
             .catch((error) => {
                 if (error.code === "auth/user-not-found") {

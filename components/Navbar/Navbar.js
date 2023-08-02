@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
@@ -27,11 +27,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 const Navbar = () => {
+
   const router = useRouter();
   const handleSignout = () => {
     auth
       .signOut()
       .then(() => {
+        localStorage.removeItem("user")
         router.push('/sign-in/sign-in');
       })
       .catch((err) => {
@@ -74,7 +76,7 @@ const Navbar = () => {
               <div className='flex flex-1 items-center justify-center sm:items-stretch '>
                 <div className='hidden md:ml-6 md:block'>
                   <div className='flex space-x-4 items-center'>
-                    {!auth.currentUser
+                    {typeof window !== 'undefined' && !localStorage.getItem('user')
                       ? navigation.map((item) => (
                           <Disclosure
                             key={item.name}
@@ -135,7 +137,7 @@ const Navbar = () => {
                 </div>
               </div>
               <div className='absolut inset-y-0 right-0 gap-3 items-center pr-12 sm:static sm:inset-auto sm:ml-6 md:pr-0'>
-                {auth.currentUser ? (
+                {typeof window !== 'undefined' && localStorage.getItem('user') ? (
                   <Menu as='div' className='relative ml-3 mr-5'>
                     <div>
                       <Menu.Button className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
@@ -143,7 +145,7 @@ const Navbar = () => {
                         <span className='sr-only'>Open user menu</span>
                         <img
                           className='h-8 w-8 rounded-full'
-                          src={auth.currentUser.photoURL}
+                          src={auth.currentUser &&  auth.currentUser.photoURL}
                           alt=''
                         />
                       </Menu.Button>

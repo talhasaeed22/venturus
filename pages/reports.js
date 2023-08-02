@@ -1,8 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '@mui/joy/Input';
 import ReportsTable from '@/components/Helpers/ReportsTable';
+import { getDocs, collection } from 'firebase/firestore'
+import { db, auth } from '@/FirebaseConfig';
+import { reportsData } from '@/components/Helpers/ReportsData';
 
 const Reports = () => {
+  const [reports, setReports] = useState([])
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    fetchReports();
+  }, [])
+
+  const fetchReports = async () => {
+    try {
+      setLoading(true)
+      const reportItems = [];
+      const querySnapshot = await getDocs(collection(db, "reports"));
+      querySnapshot.forEach((doc) => {
+        const { user, title, report, type, status, month, date, year } = doc.data();
+        if(auth.currentUser.uid === user){
+          reportItems.push({
+            title:title,
+            status:status,
+            type:type,
+            report:report,
+            month,
+            date, year
+          });
+        }
+      });
+      setReports(reportItems);
+      setLoading(false)
+    } catch (excep) {
+      console.log(excep);
+    }
+  }
   return (
     <div className='px-4 mx-auto max-w-screen-2xl lg:px-12 my-10'>
       <div className='bg-[#242e42] relative shadow-md sm:rounded-lg overflow-hidden '>
@@ -40,7 +73,7 @@ const Reports = () => {
           </div>
 
           <div className='min-h-[30rem]'>
-            <ReportsTable />
+            <ReportsTable reports={reports} loading={loading} />
           </div>
 
           <div className='flex gap-3 justify-end'>

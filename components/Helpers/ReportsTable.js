@@ -1,6 +1,21 @@
 import React from 'react';
 import { reportsData } from './ReportsData';
-const ReportsTable = () => {
+import { setGeneratedReport } from '@/store/actions';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import LoadingSpinner from '../Spinner/LoadingSpinner';
+const ReportsTable = ({ reports, loading }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const handleReport = (title, data) => {
+    dispatch(setGeneratedReport(data));
+
+    router.push({
+      pathname: '/generated-report',
+      query: { title: title },
+    });
+  }
   return (
     <div className='overflow-x-auto relative'>
       <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
@@ -21,9 +36,10 @@ const ReportsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {reportsData.map((item, index) => {
+          {loading ? <div className='flex items-center justify-center my-10 w-full'><LoadingSpinner /></div> : reports.map((item, index) => {
             return (
               <tr
+                onClick={()=>{handleReport(item.title, item.report)}}
                 key={index}
                 className='bg-[#1f2738] border-b-2 border-gray-700 hover:bg-[#454d5e] hover:cursor-pointer'
               >
@@ -41,7 +57,7 @@ const ReportsTable = () => {
                   </span>
                 </td>
                 <td className='py-4 px-6'>{item.type}</td>
-                <td className='py-4 px-6'>{item.createdAt}</td>
+                <td className='py-4 px-6'>{item.date}/{item.month}/{item.year}</td>
               </tr>
             );
           })}
