@@ -11,8 +11,7 @@ const YourComponent = () => {
   const fetchData = async () => {
     try {
       const response = await axios.post('https://gtmapp3-pmvgxtzxma-uc.a.run.app/get_responses/', {
-        // Optional: Add data to be sent with the POST request in the request body
-        json:{"user_input": 'An academy which teaches 9th 10th 11th 12th students to pass with good marks in board examinations'},
+        user_input: 'An academy which teaches 9th 10th 11th 12th students to pass with good marks in board examinations'
       });
 
       setResponseData(response.data);
