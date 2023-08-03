@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { auth } from '@/FirebaseConfig';
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   signInWithPopup,
-  updateProfile,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { useState } from 'react';
@@ -28,7 +27,6 @@ const SignIn = () => {
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
 
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
@@ -42,7 +40,6 @@ const SignIn = () => {
     await signInWithPopup(auth, googleProvider)
       .then((result) => {
         setLocalUser(result.user);
-        console.log("Before dispatch", result.user)
         dispatch(setSignedInUser(result.user));
         router.push('/');
       })
@@ -57,8 +54,7 @@ const SignIn = () => {
     await signInWithPopup(auth, facebookProvider)
       .then((result) => {
         setLocalUser(result.user);
-        // localStorage.setItem('user', result.user);
-
+        dispatch(setSignedInUser(result.user));
         router.push('/');
       })
       .catch((err) => {
@@ -156,17 +152,8 @@ const SignIn = () => {
             className='py-[0.625rem] focus:ring-[#3482F6] focus:ring-1 h-[40px] px-[1rem] w-full rounded-[0.225rem] border outline-none border-[#00000029]'
           />
         </div>
-
-        {/* <div className='flex flex-col'>
-                    <span className='text-sm'>Pasword</span>
-                    <input type="password" name="password" id="password" className='py-[0.625rem] px-[1rem] w-full rounded-[0.375rem] border outline-none border-[#00000029]' />
-                </div> */}
-
         <FormControl sx={{ width: '100%' }} variant='outlined'>
           <span className='text-sm'>Password</span>
-
-          {/* <FormHelperText id="outlined-weight-helper-text">Password</FormHelperText> */}
-          {/* <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel> */}
           <OutlinedInput
             onChange={onchange}
             name='password'
@@ -203,7 +190,7 @@ const SignIn = () => {
             No account?{' '}
             <span
               onClick={() => {
-                router.push('/sign-up/sign-up');
+                router.push('/sign-up');
               }}
               className='text-[#103fef] hover:underline cursor-pointer'
             >
