@@ -170,7 +170,7 @@ const SignUp = () => {
                 <button onClick={handleSignup} className='bg-[#103FEF] hover:bg-[#0D33BF] min-h-[2.25rem] rounded-[0.375rem] text-white font-[600]' style={{ fontSize: '12px' }}>CONTINUE</button>
 
                 <div>
-                    <span className='text-sm text-[#000000a6]'>Have an account? <span onClick={()=>{router.push('/sign-in/sign-in')}} className='text-[#103fef] hover:underline cursor-pointer'>Signin</span></span>
+                    <span className='text-sm text-[#000000a6]'>Have an account? <span onClick={()=>{router.push('/sign-in')}} className='text-[#103fef] hover:underline cursor-pointer'>Signin</span></span>
                 </div>
 
             </div>

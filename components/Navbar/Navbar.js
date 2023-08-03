@@ -40,7 +40,7 @@ const Navbar = () => {
   const renderLoginSignUpButton = () => {
     return (
       <button
-        onClick={() => router.push('/sign-in/sign-in')}
+        onClick={() => router.push('/sign-in')}
         className='bg-[#1e51fd] py-2 px-4 mr-5 text-white sm:text-[15px] text-[13px] hover:bg-gray-700 rounded-[0.5rem]'
       >
         Login/Register
@@ -103,7 +103,7 @@ const Navbar = () => {
       .then(() => {
         dispatch(setSignedInUser(null));
         localStorage.removeItem('localUser');
-        router.push('/sign-in/sign-in');
+        router.push('/sign-in');
       })
       .catch((err) => {
         console.log('Some error in signout');
