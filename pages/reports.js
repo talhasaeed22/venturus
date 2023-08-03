@@ -4,10 +4,13 @@ import ReportsTable from '@/components/Helpers/ReportsTable';
 import { getDocs, collection } from 'firebase/firestore'
 import { db, auth } from '@/FirebaseConfig';
 import { reportsData } from '@/components/Helpers/ReportsData';
+import { useRouter } from 'next/router';
+import withAuth from '@/lib/withAuth';
 
 const Reports = () => {
   const [reports, setReports] = useState([])
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
   useEffect(() => {
     fetchReports();
   }, [])
@@ -19,7 +22,7 @@ const Reports = () => {
       const querySnapshot = await getDocs(collection(db, "reports"));
       querySnapshot.forEach((doc) => {
         const { user, title, report, type, status, month, date, year } = doc.data();
-        if(auth.currentUser.uid === user){
+        if(auth?.currentUser?.uid === user){
           reportItems.push({
             title:title,
             status:status,
@@ -59,7 +62,7 @@ const Reports = () => {
             </div>
 
             <div className='w-full lg:w-fit'>
-              <button
+              <button onClick={() => router.push("/create-report")}
                 className={`px-4 w-full hover:bg-[#357a3a] py-[0.5rem]  bg-[#4caf50] text-white rounded-[0.5rem]`}
               >
                 {' '}
@@ -90,4 +93,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default withAuth(Reports);

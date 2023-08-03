@@ -5,3 +5,10 @@ export const setGeneratedReport = (generatedReport) => {
     payload: generatedReport,
   };
 };
+
+export const setSignedInUser = (user) => {
+  return {
+    type: 'SET_SIGNEDIN_USER',
+    payload: user,
+  };
+};

@@ -1,8 +1,17 @@
 // store.js
 import { createStore } from 'redux';
 
+const getInitialLocalUser = () => {
+  if (typeof window !== 'undefined') {
+    const localUserData = JSON.parse(localStorage.getItem('localUser'));
+    return localUserData || null;
+  }
+  return null;
+};
+
 const initialState = {
   generatedReport: null,
+  signedInUser: getInitialLocalUser(),
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +20,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         generatedReport: action.payload,
+      };
+    case 'SET_SIGNEDIN_USER':
+      return {
+        ...state,
+        signedInUser: action.payload,
       };
     default:
       return state;

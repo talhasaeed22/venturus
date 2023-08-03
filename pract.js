@@ -31,4 +31,3 @@ function getTimeAgoOrFormattedTime(timestamp) {
 // Example usage:
 const timestamp = Date.now() - 21083 * 60 * 1000; // Replace this with your timestamp in milliseconds
 const formattedTimeAgo = getTimeAgoOrFormattedTime(timestamp);
-console.log(formattedTimeAgo);

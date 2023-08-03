@@ -14,6 +14,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db, auth } from '@/FirebaseConfig';
 
 import Loader from '@/components/Loader/Loader';
+import withAuth from '@/lib/withAuth';
 const createReport = () => {
   const router = useRouter();
 
@@ -46,7 +47,6 @@ const createReport = () => {
     const month = currentTime.getMonth() + 1;
     const date = currentTime.getDate();
     const year = currentTime.getFullYear();
-    console.log('Submitted');
     try {
       setLoading(true);
       const response = await axios.post(
@@ -57,7 +57,6 @@ const createReport = () => {
       );
 
       const responseData = response.data;
-      console.log(responseData.responses);
 
       await addDoc(collection(db, 'reports'), {
         user: auth.currentUser.uid,
@@ -71,17 +70,15 @@ const createReport = () => {
       })
 
 
-      // dispatch(setGeneratedReport(responseData));
+      dispatch(setGeneratedReport(responseData));
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
-      alert('Added')
-      setText('')
-      // router.push({
-      //   pathname: '/generated-report',
-      //   query: { title: text },
-      // });
+      router.push({
+        pathname: '/generated-report',
+        query: { title: text },
+      });
     }
   };
 
@@ -179,4 +176,4 @@ const createReport = () => {
   );
 };
 
-export default createReport;
+export default  withAuth(createReport);

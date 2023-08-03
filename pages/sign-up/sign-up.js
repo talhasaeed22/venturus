@@ -15,9 +15,12 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useRouter } from 'next/router';
 import { Height } from '@mui/icons-material';
 import Alert from '@/components/Modal/Alert';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const SignUp = () => {
     const router = useRouter()
+    const [localUser, setLocalUser] = useLocalStorage('localUser', "");
+
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -49,6 +52,8 @@ const SignUp = () => {
         )
           .then((userCred) => {
             setIsLoading(false);
+            setLocalUser(result.user)
+            // localStorage.setItem("user" , result.user)
             router.push("/");
           })
           .catch((error) => {
