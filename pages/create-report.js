@@ -10,7 +10,7 @@ import { countries } from '@/components/Helpers/Countries';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setGeneratedReport } from '../store/actions';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc } from 'firebase/firestore';
 import { db, auth } from '@/FirebaseConfig';
 
 import Loader from '@/components/Loader/Loader';
@@ -21,6 +21,7 @@ const createReport = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const [reportType, setReportType] = useState(10);
 
@@ -61,24 +62,26 @@ const createReport = () => {
       await addDoc(collection(db, 'reports'), {
         user: auth.currentUser.uid,
         title: text,
-        status: "Generated",
+        status: 'Generated',
         type: reportType === 10 ? 'Advanced' : 'Standard',
         report: responseData,
-        month:month,
-        date:date,
-        year:year
-      })
-
+        month: month,
+        date: date,
+        year: year,
+      });
 
       dispatch(setGeneratedReport(responseData));
     } catch (error) {
       console.error('Error fetching data:', error);
+      setIsError(true);
     } finally {
       setLoading(false);
-      router.push({
-        pathname: '/generated-report',
-        query: { title: text },
-      });
+      if (!isError) {
+        router.push({
+          pathname: '/generated-report',
+          query: { title: text },
+        });
+      }
     }
   };
 
@@ -155,8 +158,9 @@ const createReport = () => {
               <button
                 onClick={handleGeneratedReport}
                 disabled={text.length === 0}
-                className={`px-4 ${text.length < 8 && 'cursor-not-allowed opacity-50'
-                  }  hover:bg-[#1e51fd] h-min py-[0.5rem] sm:w-fit w-full bg-[#1e51fd] text-white rounded-[0.5rem]`}
+                className={`px-4 ${
+                  text.length < 8 && 'cursor-not-allowed opacity-50'
+                }  hover:bg-[#1e51fd] h-min py-[0.5rem] sm:w-fit w-full bg-[#1e51fd] text-white rounded-[0.5rem]`}
               >
                 Generate
               </button>
@@ -176,4 +180,4 @@ const createReport = () => {
   );
 };
 
-export default  withAuth(createReport);
+export default withAuth(createReport);
