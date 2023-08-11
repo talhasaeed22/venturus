@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
-    <>
+    <div className='bg-gradient-to-b from-[#2af598] to-[#009efd]'>
       <Hero />
 
       <div className='mt-28'>
@@ -18,6 +18,6 @@ export default function Home() {
       <div className='my-14'>
         <Testimonials />
       </div>
-    </>
+    </div>
   );
 }

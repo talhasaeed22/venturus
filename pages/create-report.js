@@ -21,7 +21,6 @@ const createReport = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
 
   const [reportType, setReportType] = useState(10);
 
@@ -71,17 +70,14 @@ const createReport = () => {
       });
 
       dispatch(setGeneratedReport(responseData));
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setIsError(true);
-    } finally {
-      setLoading(false);
-      if (!isError) {
         router.push({
           pathname: '/generated-report',
           query: { title: text },
         });
-      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
     }
   };
 

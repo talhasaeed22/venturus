@@ -8,7 +8,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Provider store={store}>
-        <Navbar /> <Component {...pageProps} /> <Footer />
+        <Navbar /> <Component {...pageProps} /> 
+        {/* <Footer /> */}
       </Provider>
     </>
   );
